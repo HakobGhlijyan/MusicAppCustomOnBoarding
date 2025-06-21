@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RootView: View {
     @State var showHomeView: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
