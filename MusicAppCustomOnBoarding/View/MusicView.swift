@@ -99,25 +99,25 @@ struct MusicView: View {
                     lastDragPosition = 0
                     
                     if show && dragOffset > 50 {
-                        withAnimation(.smooth) { show = false }
+                        withAnimation { show = false }
                     } else if !show && dragOffset > 50 {
-                        withAnimation(.smooth) { show = true }
+                        withAnimation { show = true }
                     }
                     
-                    withAnimation(.spring) { dragOffset = 0 }
+                    withAnimation { dragOffset = 0 }
                     
-                    withAnimation(.spring) {
+                    withAnimation {
                         if !show {
                             hideing = false
                         } else {
-                            DispatchQueue.main.asyncAfter(deadline:.now() + 0.5) { hideing = true }
+                            hideing = true
                         }
                     }
                     
-                    DispatchQueue.main.asyncAfter(deadline:.now() + 0.5) { opacity = 1 }
+                    DispatchQueue.main.asyncAfter(deadline:.now() + 0.2) { opacity = 1 }
                 }
         )
-        .animation(.spring, value: show)
+        .animation(.bouncy(duration: 0.2), value: show)
         .frame(maxHeight: .infinity, alignment: .bottom)
         .padding(show ? (min(dragOffset / 20, 30)) : (30 - min(dragOffset / 20, 30)))
         .ignoresSafeArea()
@@ -125,7 +125,7 @@ struct MusicView: View {
 }
 
 #Preview {
-    RootView()
+    HomeView()
         .preferredColorScheme(.dark)
 }
 
