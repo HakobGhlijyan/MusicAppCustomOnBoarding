@@ -11,12 +11,14 @@ struct RootView: View {
     @State var showHomeView: Bool = false
     
     var body: some View {
-        ZStack {
-            if showHomeView {
-                HomeView()
-                    .transition(.slide)
-            } else {
-                OnBoardingView(showHomeView: $showHomeView)
+        NavigationStack {
+            ZStack {
+                if showHomeView {
+                    HomeView()
+                        .transition(.slide)
+                } else {
+                    OnBoardingView(showHomeView: $showHomeView)
+                }
             }
         }
     }

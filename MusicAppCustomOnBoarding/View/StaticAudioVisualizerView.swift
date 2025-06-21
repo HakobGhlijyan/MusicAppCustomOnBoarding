@@ -65,6 +65,7 @@ struct StaticAudioVisualizerView: View {
                         audioPlayer.seekTo(progress: dragProgress)
                     }
             )
+            .frame(maxHeight: 100)
             
             //Buttons
             HStack(spacing: 30) {
