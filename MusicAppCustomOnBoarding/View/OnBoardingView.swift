@@ -42,7 +42,7 @@ struct OnBoardingView: View {
                                 VStack(spacing: 0) {
                                     LoopingPlayerView(videoName: screen.video, videoType: "mp4", isPlaying: currentScreen == screen)
                                     .frame(width: geo.size.width, height: geo.size.height / 1.5)
-                                    .scaleEffect(0.9)
+                                    .scaleEffect(0.85)
                                     
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text(screen.title)
@@ -52,9 +52,9 @@ struct OnBoardingView: View {
                                             .font(.callout)
                                             .foregroundStyle(.secondary)
                                         
+                                        Spacer()
+                                        
                                         if screens.last == screen {
-                                            Spacer()
-                                            
                                             Button {
                                                 withAnimation { showHomeView = true }
                                             } label: {
@@ -65,7 +65,6 @@ struct OnBoardingView: View {
                                                     .background(.gray.opacity(0.3), in: .capsule)
                                             }
                                             .tint(.white)
-                                            .padding(.horizontal)
                                             .padding(.bottom, 40)
                                         }
                                     }
@@ -93,6 +92,17 @@ struct OnBoardingView: View {
                     .scrollTargetBehavior(.viewAligned)
                     .scrollIndicators(.hidden)
                     .ignoresSafeArea()
+                    
+                    //Indicator
+                    HStack(spacing: 10) {
+                        ForEach(screens) { screen in
+                            Circle()
+                                .frame(width: 8, height: 8)
+                                .foregroundStyle(currentScreen == screen ? .primary : .secondary)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.bottom, 30)
                 }
             }
         }

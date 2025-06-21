@@ -25,34 +25,41 @@ struct MusicView: View {
         GeometryReader { geo in
             VStack {
                 Group {
-                    ZStack(alignment: .leading) {
+                    ZStack(alignment: hideing ? .center : .leading) {
                         ImageView(image: selectedSong?.image ?? "", dragOffset: dragOffset, show: show, geo: geo.size)
-                        HStack {
-                            TextView(name: selectedSong?.title ?? "", dragOffset: dragOffset, show: show, geo: geo.size, opacity: opacity)
-                            
-                            if !hideing {
-                                Spacer()
-                                
-                                Button {
-                                    audioPlayer.togglePlayPause()
-                                } label: {
-                                    Image (systemName: audioPlayer.isPlaying ? "pause.fill" : "play.fill")
-                                        .font(.title)
-                                        .foregroundColor(.white)
-                                        .frame(width: 50, height: 50)
-                                        .background(Color(.systemGray5), in: .rect(cornerRadius: 16))
+                        
+                        Group {
+                            if hideing {
+                                VStack {
+                                    TextView(name: selectedSong?.title ?? "", dragOffset: dragOffset, show: show, geo: geo.size, opacity: opacity)
+                                    
+                                    TextView(name: selectedSong?.singer ?? "", dragOffset: dragOffset, show: show, geo: geo.size, opacity: opacity, fontSize: .headline)
                                 }
-                                .transition(.scale)
+                            } else {
+                                HStack {
+                                    TextView(name: selectedSong?.title ?? "", dragOffset: dragOffset, show: show, geo: geo.size, opacity: opacity)
+                                    
+                                    Spacer()
+                                    
+                                    Button {
+                                        audioPlayer.togglePlayPause()
+                                    } label: {
+                                        Image (systemName: audioPlayer.isPlaying ? "pause.fill" : "play.fill")
+                                            .font(.title)
+                                            .foregroundColor(.white)
+                                            .frame(width: 50, height: 50)
+                                            .background(Color(.systemGray5), in: .rect(cornerRadius: 16))
+                                    }
+                                }
                             }
                         }
                         .frame(width: hideing ? nil : geo.size.width - 20)
                     }
                 }
-                .padding(.top, show ? geo.size.height / 2 - 300 - dragOffset / 8 : 10 + dragOffset / 10)
+                .padding(.top, show ? (geo.size.height / 2 - 300 - dragOffset / 8) : (10 + dragOffset / 10))
                 .padding(.leading, show ? 0 : max(10 - dragOffset, 10))
-                
-                Spacer()
-                
+                                
+                //Player Controll
                 StaticAudioVisualizerView(audioPlayer: audioPlayer, selectedSong: Binding(get: {
                     selectedSong?.filename
                 }, set: { newValue in
@@ -63,9 +70,6 @@ struct MusicView: View {
                     }
                 }))
                 .opacity(opacity2)
-//                .offset(y: 50)
-
-                Spacer()
             }
             .frame(maxWidth: .infinity)
         }
@@ -81,7 +85,7 @@ struct MusicView: View {
                     
                     if show {
                         withAnimation(.smooth) {
-                            dragOffset = dragChange * 2 // * 2 to make it faster
+                            dragOffset = dragChange * 2
                             dragOffset = max(0, dragOffset)
                         }
                     } else {
@@ -116,11 +120,9 @@ struct MusicView: View {
         .animation(.spring, value: show)
         .frame(maxHeight: .infinity, alignment: .bottom)
         .padding(show ? (min(dragOffset / 20, 30)) : (30 - min(dragOffset / 20, 30)))
-//        .offset(y: show ? (min(dragOffset / 20, 0)) : (-120 - min(dragOffset / 10, 0)))
         .ignoresSafeArea()
     }
 }
-
 
 #Preview {
     RootView()
@@ -157,11 +159,13 @@ struct TextView: View {
     var show: Bool
     var geo: CGSize
     var opacity: Double
+    var fontSize: Font = .title
     
     var body: some View {
         HStack {
             Text(name)
-                .font(show ? .title : .callout).bold()
+                .font(show ? fontSize : .callout)
+                .bold()
                 .offset(y: show ? 180 : 0)
                 .offset(x: show ? 0 : dragOffset / 5)
                 .padding(.leading, show ? 0 : 65)

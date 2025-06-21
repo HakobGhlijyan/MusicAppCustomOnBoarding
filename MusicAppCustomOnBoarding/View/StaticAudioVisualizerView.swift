@@ -16,10 +16,21 @@ struct StaticAudioVisualizerView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("\(audioPlayer.currentTimeDisplay ) | \(audioPlayer.totalTimeDisplay)")
-                .font(.headline)
-                .frame(width: 100, height: 40)
+            Spacer()
+            //Time
+            HStack {
+                Text("\(audioPlayer.currentTimeDisplay)")
+                    .font(.headline)
+                    .frame(width: 100, height: 40)
+                
+                Spacer()
+                
+                Text("\(audioPlayer.totalTimeDisplay)")
+                    .font(.headline)
+                    .frame(width: 100, height: 40)
+            }
             
+            //Wave Music
             HStack(spacing: 2) {
                 let minHeight: CGFloat = 1
                 let maxHeight: CGFloat = 70
@@ -33,7 +44,7 @@ struct StaticAudioVisualizerView: View {
                         .frame(width: 2, height: normalizedHeight)
                 }
             }
-            .padding()
+            .padding(.vertical)
             .gesture(
                 DragGesture()
                     .updating($isDragging) { value, state, transaction in
@@ -55,12 +66,14 @@ struct StaticAudioVisualizerView: View {
                     }
             )
             
+            //Buttons
             HStack(spacing: 30) {
                 Button {
                     
                 } label: {
                     Image(systemName: "shuffle")
                         .font(.callout)
+                        .foregroundStyle(audioPlayer.isShuffle ? .white : .gray)
                 }
                 
                 Button {
@@ -94,7 +107,6 @@ struct StaticAudioVisualizerView: View {
             }
             .tint(.primary)
             .padding()
-
         }
         .onChange(of: selectedSong) { oldValue, newValue in
             loadWaveform()
@@ -102,6 +114,8 @@ struct StaticAudioVisualizerView: View {
         .onAppear {
             loadWaveform()
         }
+        .frame(maxHeight: .infinity, alignment: .bottom)
+        .padding(.bottom, 60)
     }
     
     func loadWaveform() {
@@ -118,36 +132,4 @@ struct StaticAudioVisualizerView: View {
 #Preview {
     StaticAudioVisualizerView(audioPlayer: AudioPlayerViewModel(), selectedSong: .constant("m1"))
         .preferredColorScheme(.dark)
-}
-
-struct ControllBarView: View {
-    var body: some View {
-        VStack(spacing: 64) {
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(.gray)
-                    .frame(height: 8)
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(.black)
-                    .frame(width: 90, height: 8)
-                    .overlay(alignment: .trailing) {
-                        Circle()
-                            .fill(.white)
-                            .frame(width: 14, height: 14)
-                            .padding(.leading)
-                    }
-            }
-            .padding(.horizontal, 44)
-            HStack(spacing: 40) {
-                Image(systemName: "shuffle")
-                Image(systemName: "backward.fill")
-                Image(systemName: "play.fill")
-                    .font(.system(size: 28))
-                Image(systemName: "forward.fill")
-                Image(systemName: "rectangle.expand.vertical")
-            }
-            .font(.title2)
-            .padding(.top, 20)
-        }
-    }
 }

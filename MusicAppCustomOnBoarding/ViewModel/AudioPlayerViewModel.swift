@@ -16,58 +16,79 @@ final class AudioPlayerViewModel: NSObject, AVAudioPlayerDelegate {
     var currentTimeDisplay: String = "0:00"
     var totalTimeDisplay: String = "0:00"
     var isRepeating = false
+    var isShuffle = false
     
     var playlist: [Song] = [
-        Song(title: "Blinding Lights",
-             filename: "The_Weeknd_-_Blinding_Lights",
-             image: "Blinding_Lights",
-             singerInfo: "The Weeknd — Canadian singer, known for his unique voice and 80s-style pop"),
-        
-        Song(title: "Shape of You",
-             filename: "Ed_Sheeran_-_Shape_of_You",
-             image: "Shape_of_You",
-             singerInfo: "Ed Sheeran — English singer-songwriter known for acoustic pop hits"),
-        
-        Song(title: "Bad Guy",
-             filename: "Billie_Eilish_-_bad_guy",
-             image: "Bad_Guy",
-             singerInfo: "Billie Eilish — American singer known for dark pop and whispery vocals"),
-        
-        Song(title: "Dance Monkey",
-             filename: "Tones_and_I_-_Dance_Monkey",
-             image: "Dance_Monkey",
-             singerInfo: "Tones and I — Australian singer with a unique voice and viral debut"),
-        
-        Song(title: "Levitating",
-             filename: "Dua_Lipa_-_Levitating",
-             image: "Levitating",
-             singerInfo: "Dua Lipa — British-Albanian singer blending disco and modern pop"),
-        
-        Song(title: "Senorita",
-             filename: "Inna_-_Senorita",
-             image: "Senorita",
-             singerInfo: "Inna — Pop duo known for this romantic duet"),
-        
-        Song(title: "Believer",
-             filename: "Imagine_Dragons_-_Believer",
-             image: "Believer",
-             singerInfo: "Imagine Dragons — American rock band with energetic anthems"),
-        
-        Song(title: "Stay",
-             filename: "The_Kid_LAROI_Justin_Bieber_-_Stay",
-             image: "Stay",
-             singerInfo: "The Kid LAROI & Justin Bieber — Collaboration between a rising star and pop icon"),
-        
-        Song(title: "Peaches",
-             filename: "Justin_Bieber_Daniel_Caesar_Giveon_-_Peaches",
-             image: "Peaches",
-             singerInfo: "Justin Bieber — Canadian pop sensation, with smooth R&B influences"),
-        
-        Song(title: "Easy On Me",
-             filename: "Adele_-_Easy_On_Me",
-             image: "Easy_On_Me",
-             singerInfo: "Adele — British singer-songwriter known for emotional ballads")
-        
+        Song(
+            title: "Blinding Lights",
+            filename: "The_Weeknd_-_Blinding_Lights",
+            image: "Blinding_Lights",
+            singerInfo: "The Weeknd — Canadian singer, known for his unique voice and 80s-style pop",
+            singer: "The Weeknd"
+        ),
+        Song(
+            title: "Shape of You",
+            filename: "Ed_Sheeran_-_Shape_of_You",
+            image: "Shape_of_You",
+            singerInfo: "Ed Sheeran — English singer-songwriter known for acoustic pop hits",
+            singer: "Ed Sheeran"
+        ),
+        Song(
+            title: "Bad Guy",
+            filename: "Billie_Eilish_-_bad_guy",
+            image: "Bad_Guy",
+            singerInfo: "Billie Eilish — American singer known for dark pop and whispery vocals",
+            singer: "Billie Eilish"
+        ),
+        Song(
+            title: "Dance Monkey",
+            filename: "Tones_and_I_-_Dance_Monkey",
+            image: "Dance_Monkey",
+            singerInfo: "Tones and I — Australian singer with a unique voice and viral debut",
+            singer: "Tones and I"
+        ),
+        Song(
+            title: "Levitating",
+            filename: "Dua_Lipa_-_Levitating",
+            image: "Levitating",
+            singerInfo: "Dua Lipa — British-Albanian singer blending disco and modern pop",
+            singer: "Dua Lipa"
+        ),
+        Song(
+            title: "Senorita",
+            filename: "Inna_-_Senorita",
+            image: "Senorita",
+            singerInfo: "Inna — Pop duo known for this romantic duet",
+            singer: "Inna"
+        ),
+        Song(
+            title: "Believer",
+            filename: "Imagine_Dragons_-_Believer",
+            image: "Believer",
+            singerInfo: "Imagine Dragons — American rock band with energetic anthems",
+            singer: "Imagine Dragon"
+        ),
+        Song(
+            title: "Stay",
+            filename: "The_Kid_LAROI_Justin_Bieber_-_Stay",
+            image: "Stay",
+            singerInfo: "The Kid LAROI & Justin Bieber — Collaboration between a rising star and pop icon",
+            singer: "The Kid LAROI"
+        ),
+        Song(
+            title: "Peaches",
+            filename: "Justin_Bieber_Daniel_Caesar_Giveon_-_Peaches",
+            image: "Peaches",
+            singerInfo: "Justin Bieber — Canadian pop sensation, with smooth R&B influences",
+            singer: "Justin Bieber"
+        ),
+        Song(
+            title: "Easy On Me",
+            filename: "Adele_-_Easy_On_Me",
+            image: "Easy_On_Me",
+            singerInfo: "Adele — British singer-songwriter known for emotional ballads",
+            singer: "Adele"
+        )
     ]
     
     private var currentTrackIndex = 0

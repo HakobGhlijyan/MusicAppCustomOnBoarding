@@ -19,7 +19,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     Text("Discover Music")
-                        .font(.largeTitle.bold())
+                        .font(.title.bold())
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     ForEach(audioPlayer.playlist, id: \.filename) { song in
@@ -55,7 +55,8 @@ struct HomeView: View {
                 }
             }
             .scrollIndicators(.hidden)
-            .safeAreaPadding(10)
+            .safeAreaPadding(12)
+            .safeAreaPadding(.bottom, 80)
             
             //Player
             if selectedSong != nil {
@@ -68,6 +69,7 @@ struct HomeView: View {
                 selectedSong = audioPlayer.playlist.first { $0.filename == newSong }
             }
         }
+        .navigationTitle("Discover Your Music")
     }
 }
 

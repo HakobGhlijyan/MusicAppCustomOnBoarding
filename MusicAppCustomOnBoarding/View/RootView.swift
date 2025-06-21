@@ -14,10 +14,9 @@ struct RootView: View {
         ZStack {
             if showHomeView {
                 HomeView()
-                    .transition(.scale(0, anchor: .trailing))
+                    .transition(.slide)
             } else {
                 OnBoardingView(showHomeView: $showHomeView)
-                    .transition(.scale(0, anchor: .leading))
             }
         }
     }
@@ -26,5 +25,3 @@ struct RootView: View {
 #Preview {
     RootView().preferredColorScheme(.dark)
 }
-
-//End
