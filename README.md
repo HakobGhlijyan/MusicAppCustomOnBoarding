@@ -12,6 +12,11 @@
   <img src="screens/step1.png" width="400" alt="Onboarding Step 1"/>
   <img src="screens/step2.png" width="400" alt="Onboarding Step 2"/>
   <img src="screens/step3.png" width="400" alt="Onboarding Step 3"/>
+  <img src="screens/step4.png" width="400" alt="Music Player"/>
+  <img src="screens/step5.png" width="400" alt="Music Player + mini"/>
+  <img src="screens/step6.png" width="400" alt="Music Player + full"/>
+  <img src="screens/step7.png" width="400" alt="Music Player + full"/>
+  <img src="screens/step8.png" width="400" alt="Music Player + full"/>
 </div>
 <!-- Пр�� необходимости добавьте другие скриншоты -->
 
